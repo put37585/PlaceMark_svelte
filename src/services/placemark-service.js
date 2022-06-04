@@ -198,9 +198,7 @@ export class PlaceMarkService {
   }
   async updatePoi(id, poi) {
     try {
-      console.log("made it 1")
       const res = await axios.put(`${this.placemarkUrl}/api/pois/${id}`, poi);
-      console.log("made it 2")
       return res.data;
     } catch (error) {
       return false;
