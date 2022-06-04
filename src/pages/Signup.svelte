@@ -1,5 +1,5 @@
 <script>
-  import homer2 from "/src/assets/homer2.png";
+  import map_img2 from "/src/assets/map_img2.png";
   import WelcomeNavigator from "../components/WelcomeNavigator.svelte";
   import TitleBar from "../components/TitleBar.svelte";
   import SignupForm from "../components/SignupForm.svelte";
@@ -7,7 +7,7 @@
 
 <div class="columns is-vcentered">
   <div class="column is-two-thirds">
-    <TitleBar subTitle={"Sign up or Log in"} title={"Donation Services Inc."}/>
+    <TitleBar subTitle={"Sign up or Log in"} title={"PlaceMark Service"}/>
   </div>
   <div class="column">
     <WelcomeNavigator/>
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="column has-text-centered">
-    <img alt="homer" src="{homer2}" width="300">
+    <img alt="map_img" src="{map_img2}" width="400">
   </div>
 </div>
 
