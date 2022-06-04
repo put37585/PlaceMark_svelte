@@ -1,11 +1,27 @@
 <script>
   import {getContext, onMount} from "svelte";
-  import {push} from "svelte-spa-router";
+  import { push } from "svelte-spa-router";
   import TitleBar from "../components/TitleBar.svelte";
   import MainNavigator from "../components/MainNavigator.svelte";
-  
+  import PoiVisual from "../components/PoiVisual.svelte";
+  import EditPoi from "../components/EditPoi.svelte"
+
   export let params = {};
-  
+  export let message = "";
+  const poiId = params.poiid;
+  const placeMarkService = getContext("PlaceMarkService");
+  let mainPoi = null;
+  let editMode = false;
+  async function edit() {
+    push(`/pois/${mainPoi._id}/edit`)
+  }
+
+  onMount(async () => {
+    mainPoi = await placeMarkService.getPoi(poiId);
+    if (!mainPoi) {
+      message = "No point of interest with this id";
+    }
+  });
 </script>
 
 <div class="columns is-vcentered">
@@ -18,31 +34,10 @@
 </div>
 
 <div class="box">
-    <a href="/categories/{ poi.categoryid }/poi/{poi._id}/edit" class="button is-pulled-right">
-      <span class="icon is-small">
-        <i class="fas fa-edit"></i>
-      </span>
-    </a>
-    <p class="title" name="name"> { poi.name } </p>
-    
-    {> poi-image }
-    
-    {if poi.description}
-    <div class="container is-fluid mb-4 block">
-      <label class="label">Description</label>
-      <p name="description"> { poi.description } </p>
-    </div>
-    {if}
-    <div class="container is-fluid mb-4 block">
-      <label class="label"> Latitude and Longitude </label>
-      <div class="field is-grouped">
-        <p name="latitude"> { poi.latitude } </p>
-        <p class="has-text-weight-bold mx-4"> / </p>
-        <p name="longitude"> { poi.longitude } </p>
-      </div>
-    </div>
-    {#unless poi.img}
-    {> poi-image-select }
-    {/unless}
-  
+  {#if mainPoi}
+      <PoiVisual bind:mainPoi={mainPoi} bind:message editHandler={edit} />
+  {/if}
+  <div class="section">
+    {message}
   </div>
+</div>

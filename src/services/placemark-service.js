@@ -164,7 +164,6 @@ export class PlaceMarkService {
   async createPoi(id, poi) {
     try {
       const res = await axios.post(`${this.placemarkUrl}/api/categories/${id}/pois`, poi);
-      console.log(res.data);
       return res.data;
     } catch (error) {
       return false;
@@ -193,6 +192,45 @@ export class PlaceMarkService {
     try {
       const res = await axios.delete(`${this.placemarkUrl}/api/pois/${id}`);
       return true;
+    } catch (error) {
+      return false;
+    }
+  }
+  async updatePoi(id, poi) {
+    try {
+      console.log("made it 1")
+      const res = await axios.put(`${this.placemarkUrl}/api/pois/${id}`, poi);
+      console.log("made it 2")
+      return res.data;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async uploadImageToPoi(id, image) {
+    try {
+      const formData = new FormData();
+      formData.append("file",image);
+      const res = await axios.post(`${this.placemarkUrl}/api/pois/${id}/uploadimage`, formData, {
+        headers: {
+          "Content-Type": `multipart/form-data;`,
+        },
+      });
+      return res.data;
+    } catch (error) {
+      return false;
+    }
+  }
+  async updateImageToPoi(id, image) {
+    try {
+      const formData = new FormData();
+      formData.append("file",image);
+      const res = await axios.post(`${this.placemarkUrl}/api/pois/${id}/updateimage`, formData, {
+        headers: {
+          "Content-Type": `multipart/form-data;`,
+        },
+      });
+      return res.data;
     } catch (error) {
       return false;
     }

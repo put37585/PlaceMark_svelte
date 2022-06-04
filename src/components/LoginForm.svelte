@@ -11,7 +11,7 @@
   async function login() {
     let success = await placeMarkService.login(email, password)
     if (success) {
-      push("/dashboard");
+      push("/categories");
     } else {
       email = "";
       password = "";
