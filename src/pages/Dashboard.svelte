@@ -43,7 +43,7 @@
 
 <div class="columns is-vcentered">
   <div class="column is-two-thirds">
-    <TitleBar subTitle={"Please make a Donation"} title={"Donation Services Inc."} />
+    <TitleBar subTitle={"Add and view categories"} title={"PlaceMark Service"} />
   </div>
   <div class="column">
     <MainNavigator />
