@@ -4,6 +4,7 @@
   import TitleBar from "../components/TitleBar.svelte";
   import MainNavigator from "../components/MainNavigator.svelte";
   import ImageSelect from "../components/ImageSelect.svelte";
+  import ImageCarousel from "./ImageCarousel.svelte";
   export let params = {};
   export let mainPoi = null;
   export let message = "";
@@ -47,7 +48,7 @@
 <div class="box">
   {#if mainPoi}
     <button on:click={cancelEdit} class="button is-pulled-right">
-      <span class="icon is-small">
+      <span class="icon is-small has-text-danger">
         <i class="fas fa-ban" />
       </span>
     </button>
@@ -68,7 +69,11 @@
       </div>
       <button class="button is-link">Update Point of interest</button>
     </form>
-    <ImageSelect bind:poi={mainPoi} bind:message textButton={"Update"} tempImage={mainPoi.img} updateImg={true} />
+
+    {#if mainPoi.img}
+      <ImageCarousel bind:images={mainPoi.img} enableDelete={true} poiId={mainPoi._id}/>
+    {/if}
+    <ImageSelect bind:poi={mainPoi} bind:message textButton={"Add a Image"} />
   {/if}
 
   <div class="section">

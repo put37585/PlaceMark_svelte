@@ -209,7 +209,7 @@ export class PlaceMarkService {
     try {
       const formData = new FormData();
       formData.append("file",image);
-      const res = await axios.post(`${this.placemarkUrl}/api/pois/${id}/uploadimage`, formData, {
+      const res = await axios.post(`${this.placemarkUrl}/api/pois/${id}/image`, formData, {
         headers: {
           "Content-Type": `multipart/form-data;`,
         },
@@ -219,18 +219,27 @@ export class PlaceMarkService {
       return false;
     }
   }
-  async updateImageToPoi(id, image) {
+
+  async deleteImageFromPoi(id, imageUrl){
     try {
-      const formData = new FormData();
-      formData.append("file",image);
-      const res = await axios.post(`${this.placemarkUrl}/api/pois/${id}/updateimage`, formData, {
-        headers: {
-          "Content-Type": `multipart/form-data;`,
-        },
-      });
-      return res.data;
+      const res = await axios.post(`${this.placemarkUrl}/api/pois/${id}/image/delete`, {imageUrl: imageUrl});
+      return true;
     } catch (error) {
       return false;
     }
   }
+  // async updateImageToPoi(id, image) {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("file",image);
+  //     const res = await axios.post(`${this.placemarkUrl}/api/pois/${id}/updateimage`, formData, {
+  //       headers: {
+  //         "Content-Type": `multipart/form-data;`,
+  //       },
+  //     });
+  //     return res.data;
+  //   } catch (error) {
+  //     return false;
+  //   }
+  // }
 }
