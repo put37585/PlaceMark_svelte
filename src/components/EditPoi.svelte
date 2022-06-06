@@ -4,6 +4,7 @@
   import TitleBar from "../components/TitleBar.svelte";
   import MainNavigator from "../components/MainNavigator.svelte";
   import ImageSelect from "../components/ImageSelect.svelte";
+  import ImageCarousel from "./ImageCarousel.svelte";
   export let params = {};
   export let mainPoi = null;
   export let message = "";
@@ -38,7 +39,7 @@
 
 <div class="columns is-vcentered">
   <div class="column is-two-thirds">
-    <TitleBar subTitle={"Edit point of intrest"} title={"PlaceMark Service"} />
+    <TitleBar subTitle={"Edit point of interest"} title={"PlaceMark Service"} />
   </div>
   <div class="column">
     <MainNavigator />
@@ -47,7 +48,7 @@
 <div class="box">
   {#if mainPoi}
     <button on:click={cancelEdit} class="button is-pulled-right">
-      <span class="icon is-small">
+      <span class="icon is-small has-text-danger">
         <i class="fas fa-ban" />
       </span>
     </button>
@@ -66,9 +67,13 @@
           <input bind:value={mainPoi.longitude} class="input" type="number" placeholder="Longitude" name="longitude" />
         </div>
       </div>
-      <button class="button is-link">Update Point of Intrest</button>
+      <button class="button is-link">Update Point of interest</button>
     </form>
-    <ImageSelect bind:poi={mainPoi} bind:message textButton={"Update"} tempImage={mainPoi.img} updateImg={true} />
+
+    {#if mainPoi.img}
+      <ImageCarousel bind:images={mainPoi.img} enableDelete={true} poiId={mainPoi._id}/>
+    {/if}
+    <ImageSelect bind:poi={mainPoi} bind:message textButton={"Add a Image"} />
   {/if}
 
   <div class="section">
