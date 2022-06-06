@@ -1,14 +1,15 @@
 <script>
   import {getContext} from "svelte";
-
-  export let poi;
+  import {push} from "svelte-spa-router";
+  export let poiId;
+  export let images = [];
   export let message = "";
   export let textButton = "Upload";
-  export let tempImage = null;
   const placeMarkService = getContext("PlaceMarkService");
   let fileinput;
   let filename = "";
   let image;
+  let tempImage = null;
   const onFileSelected = (e) => {
     image = e.target.files[0];
     filename = image.name;
@@ -20,10 +21,10 @@
   };
 
   async function uploadImage() {
-    const updatedPoi = await placeMarkService.uploadImageToPoi(poi._id, image);
+    const updatedPoi = await placeMarkService.uploadImageToPoi(poiId, image);
     if (updatedPoi) {
-      poi = updatedPoi;
-      poi.img = [...poi.img];
+      images = updatedPoi.img;
+      images = [...images];
       tempImage = null;
       filename = "";
       message = "";

@@ -71,9 +71,9 @@
     </form>
 
     {#if mainPoi.img}
-      <ImageCarousel bind:images={mainPoi.img} enableDelete={true} poiId={mainPoi._id}/>
+      <ImageCarousel bind:images={mainPoi.img} enableDelete={true} poiId={mainPoi._id} />
     {/if}
-    <ImageSelect bind:poi={mainPoi} bind:message textButton={"Add a Image"} />
+    <ImageSelect bind:images={mainPoi.img} poiId={mainPoi._id} bind:message textButton={"Add image"} />
   {/if}
 
   <div class="section">
