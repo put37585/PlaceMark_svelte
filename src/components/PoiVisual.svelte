@@ -1,9 +1,11 @@
 <script>
-    import ImageSelect from "../components/ImageSelect.svelte";
-    export let mainPoi = null;
-    export let message = "";
-    export let editHandler = null;
+  import ImageSelect from "../components/ImageSelect.svelte";
+  import ImageCarousel from "./ImageCarousel.svelte";
+  export let mainPoi = null;
+  export let message = "";
+  export let editHandler = null;
 </script>
+
 <button on:click={editHandler} class="button is-pulled-right">
   <span class="icon is-small">
     <i class="fas fa-edit" />
@@ -11,11 +13,7 @@
 </button>
 <p class="title" name="name">{mainPoi.name}</p>
 {#if mainPoi.img}
-  <div class="card-image">
-    <figure class="image is-256x256">
-      <img src={mainPoi.img} alt="The point of interest" />
-    </figure>
-  </div>
+  <ImageCarousel bind:images={mainPoi.img} poiId={mainPoi._id}/>
 {/if}
 {#if mainPoi.description}
   <div class="container is-fluid mb-4 block">
@@ -31,6 +29,6 @@
     <p name="longitude">{mainPoi.longitude}</p>
   </div>
 </div>
-{#if !mainPoi.img}
+{#if !mainPoi.img.length}
   <ImageSelect bind:poi={mainPoi} bind:message />
 {/if}

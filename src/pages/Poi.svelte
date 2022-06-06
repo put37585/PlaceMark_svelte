@@ -1,10 +1,10 @@
 <script>
   import {getContext, onMount} from "svelte";
-  import { push } from "svelte-spa-router";
+  import {push} from "svelte-spa-router";
   import TitleBar from "../components/TitleBar.svelte";
   import MainNavigator from "../components/MainNavigator.svelte";
   import PoiVisual from "../components/PoiVisual.svelte";
-  import EditPoi from "../components/EditPoi.svelte"
+  import EditPoi from "../components/EditPoi.svelte";
 
   export let params = {};
   export let message = "";
@@ -13,9 +13,11 @@
   let mainPoi = null;
   let editMode = false;
   async function edit() {
-    push(`/pois/${mainPoi._id}/edit`)
+    push(`/pois/${mainPoi._id}/edit`);
   }
-
+  async function backToCategory() {
+    push(`/categories/${mainPoi.categoryid}`);
+  }
   onMount(async () => {
     mainPoi = await placeMarkService.getPoi(poiId);
     if (!mainPoi) {
@@ -34,8 +36,13 @@
 </div>
 
 <div class="box">
+  <button on:click={backToCategory} class="button is-rounded">
+    <span class="icon is-normal is-pulled-left">
+      <i class="far fa-arrow-alt-circle-left" />
+    </span>
+  </button>
   {#if mainPoi}
-      <PoiVisual bind:mainPoi={mainPoi} bind:message editHandler={edit} />
+    <PoiVisual bind:mainPoi bind:message editHandler={edit} />
   {/if}
   <div class="section">
     {message}

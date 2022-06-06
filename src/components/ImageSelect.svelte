@@ -5,7 +5,6 @@
   export let message = "";
   export let textButton = "Upload";
   export let tempImage = null;
-  export let updateImg = false;
   const placeMarkService = getContext("PlaceMarkService");
   let fileinput;
   let filename = "";
@@ -24,27 +23,12 @@
     const updatedPoi = await placeMarkService.uploadImageToPoi(poi._id, image);
     if (updatedPoi) {
       poi = updatedPoi;
+      poi.img = [...poi.img];
+      tempImage = null;
       filename = "";
       message = "";
     } else {
       message = "Error while uploading image";
-    }
-  }
-  async function updateImage() {
-    const updatedPoi = await placeMarkService.updateImageToPoi(poi._id, image);
-    if (updatedPoi) {
-      poi = updatedPoi;
-      filename = "";
-      message = "";
-    } else {
-      message = "Error while uploading image";
-    }
-  }
-  async function imageUploadHandler() {
-    if (updateImg) {
-      updateImage();
-    } else {
-      uploadImage();
     }
   }
 </script>
@@ -64,6 +48,6 @@
       </span>
       <span class="file-name">{filename}</span>
     </label>
-    <button on:click={imageUploadHandler} class="button is-info">{textButton}</button>
+    <button on:click={uploadImage} class="button is-info">{textButton}</button>
   </div>
 </div>
