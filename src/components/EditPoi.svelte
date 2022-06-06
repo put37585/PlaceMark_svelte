@@ -38,7 +38,7 @@
 
 <div class="columns is-vcentered">
   <div class="column is-two-thirds">
-    <TitleBar subTitle={"Edit point of intrest"} title={"PlaceMark Service"} />
+    <TitleBar subTitle={"Edit point of interest"} title={"PlaceMark Service"} />
   </div>
   <div class="column">
     <MainNavigator />
@@ -66,7 +66,7 @@
           <input bind:value={mainPoi.longitude} class="input" type="number" placeholder="Longitude" name="longitude" />
         </div>
       </div>
-      <button class="button is-link">Update Point of Intrest</button>
+      <button class="button is-link">Update Point of interest</button>
     </form>
     <ImageSelect bind:poi={mainPoi} bind:message textButton={"Update"} tempImage={mainPoi.img} updateImg={true} />
   {/if}

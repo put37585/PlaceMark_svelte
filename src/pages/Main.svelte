@@ -23,7 +23,7 @@
   </div>
   <div class="column">
     <h1 class="title">Welcome to PlaceMark</h1>
-    <p>Categorize your points of intrest!</p>
+    <p>Categorize your points of interest!</p>
     <p>Add images and more ...</p>
   </div>
 </div>

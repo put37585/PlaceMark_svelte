@@ -26,7 +26,7 @@
 
 <div class="columns is-vcentered">
   <div class="column is-two-thirds">
-    <TitleBar subTitle={"Your point of intrest"} title={"PlaceMark Service"} />
+    <TitleBar subTitle={"Your point of interest"} title={"PlaceMark Service"} />
   </div>
   <div class="column">
     <MainNavigator />
