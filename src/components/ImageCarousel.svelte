@@ -1,10 +1,12 @@
 <script>
   import Carousel from "svelte-carousel";
+  import {push} from "svelte-spa-router";
   import {getContext} from "svelte";
   export let images = [];
   export let enableDelete = false;
   export let poiId;
   const placeMarkService = getContext("PlaceMarkService");
+  let carousel;
   let currentIndex = 0;
   async function deleteImage() {
     if (!images.length) return;
@@ -18,6 +20,9 @@
       }
     }
   }
+  async function onCarouselChange(currentIdx) {
+    currentIndex = currentIdx;
+  }
 </script>
 
 {#if images.length}
@@ -28,7 +33,8 @@
       </span>
     </button>
   {/if}
-  <Carousel on:pageChange={(event) => (currentIndex = event.detail)}>
+  {#key images}
+  <Carousel bind:this={carousel} on:pageChange={(event) => onCarouselChange(event.detail)}>
     {#each images as img}
       <div class="card-image">
         <figure class="image is-256x256">
@@ -37,4 +43,5 @@
       </div>
     {/each}
   </Carousel>
+  {/key}
 {/if}
