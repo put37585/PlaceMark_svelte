@@ -11,7 +11,7 @@
   import Poi from "./pages/Poi.svelte"
   import EditPoi from "./components/EditPoi.svelte"
   
-  setContext("PlaceMarkService", new PlaceMarkService("http://localhost:4000"));// "https://placemark-ksda.herokuapp.com")); //
+  setContext("PlaceMarkService", new PlaceMarkService("https://placemark-ksda.herokuapp.com"));// "https://placemark-ksda.herokuapp.com")); //
 
   let routes = {
     "/": Main,
